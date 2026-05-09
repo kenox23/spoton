@@ -1,57 +1,46 @@
-
-<?php    
-    include 'connect.php';
-    include 'readrecords.php';   
-    require_once 'includes/header.php'; 
+<?php
+include 'connect.php';
+include 'readrecords.php';
 ?>
-    
-<div>
-	<button><a href="addrecord.php">Add New Student</a></button>
-</div> 
 
-<div>
-	<button><a href="logout.php">Logout</a></button>
-</div> 
+<h2>List of Students</h2>
 
+<table border="1" cellpadding="10">
 
-<div style='background-color:#8a353c'>
-    <center>
-        <p style="color:white"><h2>List of Students</h2></p>
-    </center>
-</div>     
+<tr>
+    <th>ID Number</th>
+    <th>Firstname</th>
+    <th>Lastname</th>
+    <th>Middlename</th>
+    <th>Actions</th>
+</tr>
 
-<br>
-    <div>        
-        <table id="tblCustomerRecords " class="table
-            table-striped table-bordered table-sm" cellspacing="0" width="100%"> 
-            <thead>
-                <tr> 
-                    <th>ID Number</th> 
-                    <th>Firstname</th> 
-                    <th>Lastname</th>
-                    <th>Program</th>                     
-                    <th>Year Level</th>    
-                    <th>Action</th>
-                </tr> 
-            </thead>  
-            <tbody>
-                <?php
-                    while($row = $resultset->fetch_assoc()):
-                    	$id = $row['id'];
-                ?>
-                <tr>
-                    <td><?php echo $id ?></td>
-                    <td><?php echo $row['firstname'] ?></td>
-                    <td><?php echo $row['lastname'] ?></td>
-                    <td><?php echo $row['program'] ?></td> 
-                    <td><?php echo $row['yearlevel'] ?></td> 
-                    <td><button><a href="update.php">UPDATE</a></button> | <button><a href="delete.php">DELETE</a></button></td>
-                </tr>
-                <?php endwhile;?>
-            </tbody>         
-        </table>
-        
-    </div>
+<?php while($row = mysqli_fetch_assoc($resultset)) { ?>
 
-<?php require_once 'includes/footer.php'; ?>
+<tr>
 
+    <td><?php echo $row['userid']; ?></td>
+
+    <td><?php echo $row['firstname']; ?></td>
+
+    <td><?php echo $row['lastname']; ?></td>
+
+    <td><?php echo $row['middleinitial']; ?></td>
+
+    <td>
+        <a href="update.php?id=<?php echo $row['userid']; ?>">
+            UPDATE
+        </a>
+
+        |
+
+        <a href="delete.php?id=<?php echo $row['userid']; ?>">
+            DELETE
+        </a>
+    </td>
+
+</tr>
+
+<?php } ?>
+
+</table>
