@@ -3,7 +3,7 @@
     require_once 'includes/header.php'; 
 ?>
 
-<div style='background-color:#ffff00'>
+<div style='background-color:#8a353c'>
     <center>
         <p style="color:white"><h2>User Registration Page</h2></p>
     </center>
@@ -13,31 +13,27 @@
 	<form method="post">
 		<pre>
 			Firstname:<input type="text" name="txtfirstname">
+			Middlename:<input type="text" name="txtmiddlename">
 			Lastname:<input type="text" name="txtlastname">	
 			Username:  <input type="text" name="txtusername">
-			Password:  <input type="password" name="txtpassword">		
-			Program:
-			<select name="txtprogram">
-			 <option value="">----</option>
-			 <option value="BSCS">BSCS</option>
-			 <option value="BSIT">BSIT</option>
+			Password:  <input type="password" name="txtpassword">
+			Confirm Password: <input type="password" name="txtconfirmpassword">
+			Birthdate: <input type="text" name="txtbirthdate">
+			Gender:
+			<select name="txtgender">
+			 <option value="gender">Gender</option>
+			 <option value="Male">Male</option>
+			 <option value="Female">Female</option>
+			 <option value="Other">Other</option>
 			</select>
-			
-			Year Level:
-			<select name="txtyearlevel">
-			<option value="">----</option>
-			<option value="1">1</option>
-			<option value="2">2</option>
-			<option value="3">3</option>
-			<option value="4">4</option>
-			</select>
-									
-			
+			Contact Number: <input type="text" name="txtcontactnumber">
+			Street Address: <input type="text" name="txtstreetaddress">
+			City: <input type ="text" name="txtcity"> Province : <input type="text" name ="txtprovince">
+			ZIP Code: <input type="text" name="txtzipcode">
 			<input type="submit" name="btnRegister" value="Register"> 
 		</pre>
 	</form>
 </div>
-
 
 <?php	
 	if(isset($_POST['btnRegister'])){		
@@ -45,8 +41,8 @@
 		//for tblstudent
 		$fname = $_POST['txtfirstname'];		
 		$lname = $_POST['txtlastname'];
-		$program = $_POST['txtprogram'];
-		$yearlevel = $_POST['txtyearlevel'];
+		$mname = $_POST['txtmiddlename'];
+		
 		// strtolower to convert the username to lowercase before saving to database to avoid case sensitivity issues during login
 		$username = strtolower($fname.$lname);
 		// hash the password before saving to database
@@ -54,7 +50,7 @@
 			
 						
 		// save data to tbluser
-		$sql1 ="Insert into tbluser(firstname,lastname,username,password,role) values('".$fname."','".$lname."','".$username."','".$password."','student')";
+		$sql1 ="Insert into tbluser(firstname,lastname,username,password,role) values('".$fname."','".$lname."','".$mname"','".$password."','student')";
 		mysqli_query($connection,$sql1);
 
 		$userid = mysqli_insert_id($connection);
