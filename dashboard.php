@@ -29,7 +29,6 @@ if(isset($_POST['btnRegister'])){
         // GET LAST INSERTED USER ID
         $userid = mysqli_insert_id($connection);
 
-        // INSERT INTO tblstudent - FIXED: removed non-existent columns, added program
         $sql2 = "INSERT INTO tblstudent (studentid, yearlevel, program)
                  VALUES ('$userid', '1', 'BSIT')";
         
