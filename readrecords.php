@@ -1,17 +1,12 @@
 <?php
-	
-	include 'connect.php';
-	
-	if (!$connection) {
-	    die('Could not connect: ' . mysqli_connect_error());
+include 'connect.php';
+
+// Query to get student information from both tables without JOIN
+$query = "SELECT * FROM tbluser, tblstudent WHERE tbluser.userid = tblstudent.studentid";
+$resultset = mysqli_query($connection, $query);
+
+// Check if query was successful
+if (!$resultset) {
+    die("Query failed: " . mysqli_error($connection));
 }
-	
-	$query = 'SELECT * from  tblstudent';
-        $resultset = mysqli_query($connection, $query);
-	
-	//$querybsit = 'SELECT count(*) as total from  tblstudent where program = "BSIT"';
-	//$resultset1 = mysqli_query($connection, $querybsit);
-	//$count = mysqli_fetch_assoc($resultset1);	
-		
-	
 ?>
