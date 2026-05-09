@@ -20,10 +20,8 @@
 		$uname=$_POST['txtusername'];
 		$pwd=$_POST['txtpassword'];
 		
-		$hashed_pword =  password_hash($pwd, PASSWORD_DEFAULT);	
-		
-		//check tbluseraccount if username is existing
-		$sql ="Select * from tbluseraccount where username='".$uname."'";
+		//check tbluser if username is existing
+		$sql ="Select * from tbluser where username='".$uname."'";
 		
 		$result = mysqli_query($connection,$sql);	
 		
@@ -36,7 +34,8 @@
 				  </script>";
 				  
 		//}else if($row[3] != $pwd) {		
-		}else if(!password_verify($pwd,$hashed_pword)){
+		// since we hashed the password during registration, we need to use password_verify to compare the entered password with the hashed password in database
+		}else if(!password_verify($pwd,$row['password'])){
 			echo "<script language='javascript'>
 				alert('Incorrect password');
 			     </script>";

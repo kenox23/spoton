@@ -13,7 +13,9 @@
 	<form method="post">
 		<pre>
 			Firstname:<input type="text" name="txtfirstname">
-			Lastname:<input type="text" name="txtlastname">			
+			Lastname:<input type="text" name="txtlastname">	
+			Username:  <input type="text" name="txtusername">
+			Password:  <input type="password" name="txtpassword">		
 			Program:
 			<select name="txtprogram">
 			 <option value="">----</option>
@@ -41,17 +43,27 @@
 	if(isset($_POST['btnRegister'])){		
 		//retrieve data from form and save the value to a variable
 		//for tblstudent
-		$fname=$_POST['txtfirstname'];		
-		$lname=$_POST['txtlastname'];
-		$program=$_POST['txtprogram'];
-		$yearlevel=$_POST['txtyearlevel'];
+		$fname = $_POST['txtfirstname'];		
+		$lname = $_POST['txtlastname'];
+		$program = $_POST['txtprogram'];
+		$yearlevel = $_POST['txtyearlevel'];
+		// strtolower to convert the username to lowercase before saving to database to avoid case sensitivity issues during login
+		$username = strtolower($fname.$lname);
+		// hash the password before saving to database
+		$password = password_hash($_POST['txtpassword'], PASSWORD_DEFAULT);
 			
 						
-		//save data to tblstudent		
-		$sql1 ="Insert into tblstudent(firstname,lastname,program,yearlevel) values('".$fname."','".$lname."','".$program."',".$yearlevel.")";
+		// save data to tbluser
+		$sql1 ="Insert into tbluser(firstname,lastname,username,password,role) values('".$fname."','".$lname."','".$username."','".$password."','student')";
 		mysqli_query($connection,$sql1);
+
+		$userid = mysqli_insert_id($connection);
 		
-		
+		// save data to tblstudent
+		$sql2 ="insert into tblstudent(studentid,program,yearlevel)
+        values('".$userid."','".$program."','".$yearlevel."')";
+		mysqli_query($connection,$sql2);
+
 		echo "<script language='javascript'>
 			alert('New record saved.');
 		      </script>";
