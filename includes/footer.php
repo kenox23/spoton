@@ -1,7 +1,7 @@
 
 	<hr>
 	<div id = "footer" align="center">
-		<?php echo 'Jamuel Bacus BSIT - 2 | ' .date('F d, Y') ?>
+		<?php echo 'Jamuel Bacus BSIT - 2 | Joseph Jimenez BSIT - 2' .date('F d, Y') ?>
 	</div>
 	<hr>
 </div>
