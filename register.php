@@ -1,58 +1,80 @@
-<?php
-include 'connect.php';
-
-if(isset($_POST['btnRegister'])){
-
-    $fname = $_POST['txtfirstname'];
-    $lname = $_POST['txtlastname'];
-    $mname = $_POST['txtmiddlename'];
-
-    $username = strtolower($fname.$lname);
-
-    $password = password_hash($_POST['txtpassword'], PASSWORD_DEFAULT);
-
-    // INSERT INTO tbluser
-    $sql1 = "INSERT INTO tbluser
-    (firstname, lastname, middleinitial, username, password)
-
-    VALUES
-    ('$fname','$lname','$mname','$username','$password')";
-
-    mysqli_query($connection, $sql1);
-
-    // GET LAST INSERTED USER ID
-    $userid = mysqli_insert_id($connection);
-
-    // INSERT INTO tblstudent
-    $sql2 = "INSERT INTO tblstudent
-    (studentid, yearlevel, enrollmentstatus, departmentid)
-
-    VALUES
-    ('$userid','1','Active','1')";
-
-    mysqli_query($connection, $sql2);
-
-    echo "<script>
-            alert('Student Registered Successfully');
-            window.location='dashboard.php';
-          </script>";
-}
+<?php    
+    include 'connect.php';    
+    require_once 'includes/header.php'; 
 ?>
 
-<form method="POST">
+<div style='background-color:#ffff00'>
+    <center>
+        <p style="color:white"><h2>User Registration Page</h2></p>
+    </center>
+</div>  
 
-    Firstname:
-    <input type="text" name="txtfirstname"><br><br>
+<div>
+	<form method="post">
+		<pre>
+			Firstname:<input type="text" name="txtfirstname">
+			Lastname:<input type="text" name="txtlastname">	
+			Username:  <input type="text" name="txtusername">
+			Password:  <input type="password" name="txtpassword">		
+			Program:
+			<select name="txtprogram">
+			 <option value="">----</option>
+			 <option value="BSCS">BSCS</option>
+			 <option value="BSIT">BSIT</option>
+			</select>
+			
+			Year Level:
+			<select name="txtyearlevel">
+			<option value="">----</option>
+			<option value="1">1</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+			<option value="4">4</option>
+			</select>
+									
+			
+			<input type="submit" name="btnRegister" value="Register"> 
+		</pre>
+	</form>
+</div>
 
-    Middlename:
-    <input type="text" name="txtmiddlename"><br><br>
 
-    Lastname:
-    <input type="text" name="txtlastname"><br><br>
+<?php	
+	if(isset($_POST['btnRegister'])){		
+		//retrieve data from form and save the value to a variable
+		//for tblstudent
+		$fname = $_POST['txtfirstname'];		
+		$lname = $_POST['txtlastname'];
+		$program = $_POST['txtprogram'];
+		$yearlevel = $_POST['txtyearlevel'];
+		// strtolower to convert the username to lowercase before saving to database to avoid case sensitivity issues during login
+		$username = strtolower($fname.$lname);
+		// hash the password before saving to database
+		$password = password_hash($_POST['txtpassword'], PASSWORD_DEFAULT);
+			
+						
+		// save data to tbluser
+		$sql1 ="Insert into tbluser(firstname,lastname,username,password,role) values('".$fname."','".$lname."','".$username."','".$password."','student')";
+		mysqli_query($connection,$sql1);
 
-    Password:
-    <input type="password" name="txtpassword"><br><br>
+		$userid = mysqli_insert_id($connection);
+		
+		// save data to tblstudent
+		$sql2 ="insert into tblstudent(studentid,program,yearlevel)
+        values('".$userid."','".$program."','".$yearlevel."')";
+		mysqli_query($connection,$sql2);
 
-    <input type="submit" name="btnRegister" value="Register">
+		echo "<script language='javascript'>
+			alert('New record saved.');
+		      </script>";
+		header("location: dashboard.php");
+		
+			
+		
+	}
+		
 
-</form>
+?>
+
+
+<?php require_once 'includes/footer.php'; ?>

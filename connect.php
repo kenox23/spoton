@@ -1,7 +1,8 @@
-<?php
-$connection = mysqli_connect('localhost', 'root', '', 'dbspoton');
-
-if (!$connection) {
-    die('Could not connect: ' . mysqli_connect_error());
-}
+<?php 
+	$connection = new mysqli('localhost', 'root','','dbspoton');
+	
+	if (!$connection){
+		die (mysqli_error($mysqli));
+	}
+		
 ?>

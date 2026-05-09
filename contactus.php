@@ -33,7 +33,7 @@ require_once 'includes/header.php';
         </button>
     </form>
 
-    // handle form submission
+    // TODO: Add form validation and email sending functionality here mwhehe
     <?php
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
