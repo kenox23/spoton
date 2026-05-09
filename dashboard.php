@@ -1,6 +1,14 @@
 <?php
 include 'connect.php';
-include 'readrecords.php';
+
+// Query to get student information from both tables using traditional method (no JOIN)
+$query = "SELECT * FROM tbluser, tblstudent WHERE tbluser.userid = tblstudent.studentid";
+$resultset = mysqli_query($connection, $query);
+
+// Check if query was successful
+if (!$resultset) {
+    die("Query failed: " . mysqli_error($connection));
+}
 ?>
 
 <?php
@@ -13,17 +21,17 @@ if(isset($_POST['btnRegister'])){
     $username = strtolower($fname . $lname);
     $password = password_hash($_POST['txtpassword'], PASSWORD_DEFAULT);
 
-    // INSERT INTO tbluser
-    $sql1 = "INSERT INTO tbluser (firstname, lastname, middleinitial, username, password)
-             VALUES ('$fname', '$lname', '$mname', '$username', '$password')";
+    // INSERT INTO tbluser - FIXED: changed 'middleinitial' to 'middlename'
+    $sql1 = "INSERT INTO tbluser (firstname, lastname, middlename, username, password, role)
+             VALUES ('$fname', '$lname', '$mname', '$username', '$password', 'student')";
     
     if(mysqli_query($connection, $sql1)){
         // GET LAST INSERTED USER ID
         $userid = mysqli_insert_id($connection);
 
-        // INSERT INTO tblstudent
-        $sql2 = "INSERT INTO tblstudent (studentid, yearlevel, enrollmentstatus, departmentid)
-                 VALUES ('$userid', '1', 'Active', '1')";
+        // INSERT INTO tblstudent - FIXED: removed non-existent columns, added program
+        $sql2 = "INSERT INTO tblstudent (studentid, yearlevel, program)
+                 VALUES ('$userid', '1', 'BSIT')";
         
         if(mysqli_query($connection, $sql2)){
             echo "<script>
@@ -41,16 +49,16 @@ if(isset($_POST['btnRegister'])){
 
 <form method="POST">
     Firstname:
-    <input type="text" name="txtfirstname"><br><br>
+    <input type="text" name="txtfirstname" required><br><br>
     
     Middlename:
     <input type="text" name="txtmiddlename"><br><br>
     
     Lastname:
-    <input type="text" name="txtlastname"><br><br>
+    <input type="text" name="txtlastname" required><br><br>
     
     Password:
-    <input type="password" name="txtpassword"><br><br>
+    <input type="password" name="txtpassword" required><br><br>
     
     <input type="submit" name="btnRegister" value="Register">
 </form>
@@ -63,19 +71,32 @@ if(isset($_POST['btnRegister'])){
         <th>Firstname</th>
         <th>Lastname</th>
         <th>Middlename</th>
+        <th>Year Level</th>
+        <th>Program</th>
         <th>Actions</th>
     </tr>
 
-    <?php while($row = mysqli_fetch_assoc($resultset)) { ?>
+    <?php 
+    // Check if there are results
+    if(mysqli_num_rows($resultset) > 0) {
+        while($row = mysqli_fetch_assoc($resultset)) { 
+    ?>
     <tr>
         <td><?php echo $row['userid']; ?></td>
         <td><?php echo $row['firstname']; ?></td>
         <td><?php echo $row['lastname']; ?></td>
-        <td><?php echo $row['middleinitial']; ?></td>
+        <td><?php echo $row['middlename']; ?> <!-- FIXED: changed from 'middleinitial' to 'middlename' --></td>
+        <td><?php echo $row['yearlevel']; ?></td>
+        <td><?php echo $row['program']; ?></td>
         <td>
             <a href="update.php?id=<?php echo $row['userid']; ?>">UPDATE</a> |
-            <a href="delete.php?id=<?php echo $row['userid']; ?>">DELETE</a>
+            <a href="delete.php?id=<?php echo $row['userid']; ?>" onclick="return confirm('Are you sure you want to delete this student?')">DELETE</a>
         </td>
     </tr>
-    <?php } ?>
+    <?php 
+        } 
+    } else {
+        echo "<tr><td colspan='7' align='center'>No students found</td></tr>";
+    }
+    ?>
 </table>
