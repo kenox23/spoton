@@ -1,4 +1,5 @@
 <?php    
+	session_start();
     include 'connect.php';    
     require_once 'includes/header.php'; 
 ?>
@@ -66,17 +67,16 @@
         values('".$userid."','".$program."','".$yearlevel."')";
 		mysqli_query($connection,$sql2);
 
+		$_SESSION['userid'] = $userid;
+		$_SESSION['username'] = $username;
+		$_SESSION['role'] = 'student';
+
 		echo "<script language='javascript'>
-			alert('New record saved.');
-		      </script>";
-		header("location: dashboard.php");
-		
-			
-		
+				alert('Registration successful. You are now logged in.');
+				window.location.href = 'dashboard.php';
+			  </script>";
+		exit();		
 	}
-		
-
 ?>
-
 
 <?php require_once 'includes/footer.php'; ?>

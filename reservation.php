@@ -1,4 +1,3 @@
-
 <?php
     session_start();
     include 'connect.php';
@@ -17,11 +16,12 @@
         $start = $_POST['starttime'];
         $end = $_POST['endtime'];
         $purpose = $_POST['purpose'];
+        $waitingarea = $_POST['waitingarea'];
 
         $sql = "insert into tblreservation
-                (studentid, reservationdate, starttime, endtime, purpose, status)
+                (studentid, reservationdate, starttime, endtime, purpose, status, waitingareaid)
                 values
-                ('$studentid', '$date', '$start', '$end', '$purpose', 'pending')";
+                ('$studentid', '$date', '$start', '$end', '$purpose', 'pending', '$waitingarea')";
 
         mysqli_query($connection, $sql);
 
@@ -49,7 +49,17 @@
         Purpose:
         <input type="text" name="purpose" required><br><br>
 
-        <input type="submit" name="btnReserve" value="Submit">
+        Waiting Area:
+        <select name="waitingarea" required>    
+            <?php
+                $sql = "select * from tblwaitingarea";
+                $result = mysqli_query($connection, $sql);
+                while($row = mysqli_fetch_assoc($result)){
+                    echo "<option value='".$row['waitingareaid']."'>".$row['areaname']."</option>";
+                }
+            ?>
+        </select><br><br>
+        <input type="submit" name="btnReserve" value="Submit Reservation">
     </form>
 </div>
 

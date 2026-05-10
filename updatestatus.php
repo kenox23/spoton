@@ -13,7 +13,7 @@
                   exit();
         }
 
-        $sql = "UPDATE tblreservation SET status='$status' WHERE reservationid='$id'";
+        $sql = "update tblreservation set status='$status' where reservationid='$id'";
         if(mysqli_query($connection, $sql)){
             echo "<script language='javascript'>
                     alert('Status updated successfully.');
