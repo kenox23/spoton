@@ -42,9 +42,10 @@
 			     </script>";
 		}else {		
 			$_SESSION['userid']=$row['userid'];
-			$_SESSION['username']=$row[0];
+			$_SESSION['username']=$row['username'];
 			$_SESSION['role']=$row['role'];
 			header("location: dashboard.php");
+			exit();
 		}
 			
 		
