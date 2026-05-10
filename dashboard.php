@@ -22,12 +22,13 @@
 
 <br>
     <div>        
-        <table id="tblCustomerRecords " class="table
+        <table id="tblCustomerRecords" class="table
             table-striped table-bordered table-sm" cellspacing="0" width="100%"> 
             <thead>
                 <tr> 
                     <th>ID Number</th> 
                     <th>Firstname</th> 
+                    <th>Middle Name</th>
                     <th>Lastname</th>
                     <th>Program</th>                     
                     <th>Year Level</th>    
@@ -37,15 +38,16 @@
             <tbody>
                 <?php
                     while($row = $resultset->fetch_assoc()):
-                    	$id = $row['id'];
+                    	$id = $row['userid'];
                 ?>
                 <tr>
                     <td><?php echo $id ?></td>
                     <td><?php echo $row['firstname'] ?></td>
-                    <td><?php echo $row['lastname'] ?></td>
+                    <td><?php echo $row['middlename'] ?></td>
+                    <td><?php echo $row['lastname'] ?></td> 
                     <td><?php echo $row['program'] ?></td> 
                     <td><?php echo $row['yearlevel'] ?></td> 
-                    <td><button><a href="update.php">UPDATE</a></button> | <button><a href="delete.php">DELETE</a></button></td>
+                    <td><button><a href="update.php?id=<?php echo $id; ?>">UPDATE</a></button> | <button><a href="delete.php?id=<?php echo $id; ?>">DELETE</a></button></td>
                 </tr>
                 <?php endwhile;?>
             </tbody>         

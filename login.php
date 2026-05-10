@@ -1,4 +1,5 @@
 <?php    
+    session_start();
     include 'connect.php'; 
     require_once 'includes/header.php'; 
 ?>
@@ -40,7 +41,9 @@
 				alert('Incorrect password');
 			     </script>";
 		}else {		
+			$_SESSION['userid']=$row['userid'];
 			$_SESSION['username']=$row[0];
+			$_SESSION['role']=$row['role'];
 			header("location: dashboard.php");
 		}
 			

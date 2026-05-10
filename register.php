@@ -13,9 +13,10 @@
 	<form method="post">
 		<pre>
 			Firstname:<input type="text" name="txtfirstname">
+			Middle Name:<input type="text" name="txtmiddlename">
 			Lastname:<input type="text" name="txtlastname">	
-			Username:  <input type="text" name="txtusername">
-			Password:  <input type="password" name="txtpassword">		
+			Username:<input type="text" name="txtusername">
+			Password:<input type="password" name="txtpassword">		
 			Program:
 			<select name="txtprogram">
 			 <option value="">----</option>
@@ -44,17 +45,18 @@
 		//retrieve data from form and save the value to a variable
 		//for tblstudent
 		$fname = $_POST['txtfirstname'];		
+		$mname = $_POST['txtmiddlename'];
 		$lname = $_POST['txtlastname'];
 		$program = $_POST['txtprogram'];
 		$yearlevel = $_POST['txtyearlevel'];
 		// strtolower to convert the username to lowercase before saving to database to avoid case sensitivity issues during login
-		$username = strtolower($fname.$lname);
+		$username = strtolower($_POST['txtusername']);
 		// hash the password before saving to database
 		$password = password_hash($_POST['txtpassword'], PASSWORD_DEFAULT);
 			
 						
 		// save data to tbluser
-		$sql1 ="Insert into tbluser(firstname,lastname,username,password,role) values('".$fname."','".$lname."','".$username."','".$password."','student')";
+		$sql1 ="Insert into tbluser(firstname,middlename,lastname,username,password,role) values('".$fname."','".$mname."','".$lname."','".$username."','".$password."','student')";
 		mysqli_query($connection,$sql1);
 
 		$userid = mysqli_insert_id($connection);
