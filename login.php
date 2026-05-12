@@ -1,19 +1,33 @@
-
 <?php    
-    session_start();
-    include 'connect.php'; 
-    require_once 'includes/header.php'; 
+session_start();
+include 'connect.php'; 
+require_once 'includes/header.php'; 
 ?>
 
-<div>
-	<form method="post">
-		<pre>			
-			Username:<input type="text" name="txtusername">	
-			Password:<input type="password" name="txtpassword">				
-			
-			<input type="submit" name="btnLogin" value="Login"> 
-		</pre>
-	</form>
+<div style="background-color:#8a252c; height:10px; width:100%;"></div>
+
+<div class="container my-5" style="max-width:400px;">
+
+    <h3 class="text-center mb-4">Login</h3>
+
+    <form method="post">
+
+        <div class="form-group">
+            <label>Username</label>
+            <input type="text" name="txtusername" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" name="txtpassword" class="form-control" required>
+        </div>
+
+        <button type="submit" name="btnLogin" class="btn btn-sis btn-block">
+            Login
+        </button>
+
+    </form>
+
 </div>
 
 

@@ -3,6 +3,8 @@ include 'connect.php';
 require_once 'includes/header.php'; 
 ?>
 
+<div style="background-color:#8a252c; height:10px; width:100%;"></div>
+
 <div class="container" style="max-width:600px; margin:40px auto;">
     <h2>Contact Us</h2>
 
