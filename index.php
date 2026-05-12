@@ -3,17 +3,9 @@
     require_once 'includes/header2.php'; 
 ?>
 
-<div style="background-color:#8a252c; height:10px; width:100%;"></div><br>
+<div style="background-color:#8a252c; height:10px; width:100%;"></div>
 
-<<<<<<< HEAD
-<div>
-	<button><a href="register.php" background= "#8a252c">REGISTER NEW USER</a></button><br><br>
-	<button><a href="login.php" background= "#8a252c">LOGIN</a></button>
-</div>
-=======
 <div class="container-fluid p-0 position-relative">
->>>>>>> e0c5af448968fde69ddbbe6dd03ea36b6dfdbb1f
-
     <img src="images/glebuilding.png" alt="GLE Building"
          class="img-fluid w-100"
          style="max-height:500px; object-fit:cover;">

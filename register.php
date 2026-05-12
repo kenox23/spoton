@@ -6,34 +6,67 @@
 
 <div style="background-color:#8a252c; height:10px; width:100%;"></div>
 
-<div>
-	<form method="post">
-		<pre>
-			Firstname:<input type="text" name="txtfirstname">
-			Middle Name:<input type="text" name="txtmiddlename">
-			Lastname:<input type="text" name="txtlastname">	
-			Username:<input type="text" name="txtusername">
-			Password:<input type="password" name="txtpassword">		
-			Program:
-			<select name="txtprogram">
-			 <option value="">----</option>
-			 <option value="BSCS">BSCS</option>
-			 <option value="BSIT">BSIT</option>
-			</select>
-			
-			Year Level:
-			<select name="txtyearlevel">
-			<option value="">----</option>
-			<option value="1">1</option>
-			<option value="2">2</option>
-			<option value="3">3</option>
-			<option value="4">4</option>
-			</select>
-									
-			
-			<input type="submit" name="btnRegister" value="Register"> 
-		</pre>
-	</form>
+<div style="background-color:#8a252c; height:10px; width:100%;"></div>
+
+<div class="container mt-5" style="max-width:600px;">
+
+    <h3 class="text-center mb-4">Register</h3>
+
+    <form method="post">
+
+        <div class="form-row">
+
+            <div class="form-group col-md-4">
+                <label>First Name</label>
+                <input type="text" name="txtfirstname" class="form-control" required>
+            </div>
+
+            <div class="form-group col-md-4">
+                <label>Middle Name</label>
+                <input type="text" name="txtmiddlename" class="form-control">
+            </div>
+
+            <div class="form-group col-md-4">
+                <label>Last Name</label>
+                <input type="text" name="txtlastname" class="form-control" required>
+            </div>
+
+        </div>
+
+        <div class="form-group">
+            <label>Username</label>
+            <input type="text" name="txtusername" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" name="txtpassword" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+            <label>Program</label>
+            <select name="txtprogram" class="form-control" required>
+                <option value="BSCS">BSIT</option>
+                <option value="BSIT">BSCS</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Year Level</label>
+            <select name="txtyearlevel" class="form-control" required>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+            </select>
+        </div>
+
+        <button type="submit" name="btnRegister" class="btn btn-sis btn-block">
+            Register
+        </button>
+
+    </form>
+
 </div>
 
 
