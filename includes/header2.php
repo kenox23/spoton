@@ -52,7 +52,7 @@
     </ul>
     <form class="form-inline my-2 my-lg-0">
       <a href="login.php" class="btn btn-sis-outline btn-sm mr-2">Login</a>
-      <a href="registration.php" class="btn btn-sis btn-sm">Register</a>
+      <a href="register.php" class="btn btn-sis btn-sm">Register</a>
     </form>
   </div>
 </nav>
