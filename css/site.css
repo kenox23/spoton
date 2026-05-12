@@ -1,5 +1,4 @@
-<style>
-    .button {
+.button {
         background-color: #4CAF50; /* Green */
         border: none;
         color: white;
@@ -9,9 +8,35 @@
         display: inline-block;
         font-size: 16px;
         margin: 4px 2px;
-        cursor: pointer;
+        cursor: pointer;    
     }
 
-    .button1 {width: 200px;}
-    
-</style>
+.button1 {width: 200px;}
+
+.btn-sis {
+    background-color: #8a252c;
+    border-color: #8a252c;
+    color: #fff;
+    transition: 0.2s ease;
+    border-radius: 6px;
+}
+
+.btn-sis:hover {
+    background-color: #6f1d22;
+    border-color: #6f1d22;
+    color: #fff;
+    transform: translateY(-1px);
+}
+
+.btn-sis-outline {
+    background: transparent;
+    border: 1px solid #8a252c;
+    color: #8a252c;
+    border-radius: 6px;
+    transition: 0.2s ease;
+}
+
+.btn-sis-outline:hover {
+    background-color: #8a252c;
+    color: #fff;
+}

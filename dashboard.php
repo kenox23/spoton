@@ -12,6 +12,8 @@
     $role = $_SESSION['role'];
 ?>
 
+<div style="background-color:#8a252c; height:10px; width:100%;"></div>
+
 <div>
     <h2>Dashboard</h2>
     <p>Welcome, <?php echo $_SESSION['username']; ?>!</p>

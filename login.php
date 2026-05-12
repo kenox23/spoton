@@ -5,6 +5,8 @@
     require_once 'includes/header.php'; 
 ?>
 
+<div style="background-color:#8a252c; height:10px; width:100%;"></div>
+
 <div>
 	<form method="post">
 		<pre>			
