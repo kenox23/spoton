@@ -38,7 +38,7 @@
 
         <p class="lead">Find a spot easily and reserve in seconds</p>
 
-        <a href="login.php" class="btn btn-sis btn-lg mt-2">
+        <a href="register.php" class="btn btn-sis btn-lg mt-2">
             Get Started
         </a>
 

@@ -1,6 +1,8 @@
 <?php
-require_once 'includes/header.php';
+require_once 'includes/header2.php';
 ?>
+
+<div style="background-color:#8a252c; height:10px; width:100%;"></div>
 
 <!-- ABOUT CONTENT -->
 <div class="box"><br>
