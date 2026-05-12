@@ -46,7 +46,7 @@
           <a class="dropdown-item" href="registration.php">User Registration Page</a>
           <a class="dropdown-item" href="dashboard.php">Dashboard</a> 
  	      <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
+          <a class="dropdown-item" href="#">Visit Spoton</a>
         </div>
       </li>
       <!-- <li class="nav-item">
