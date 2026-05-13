@@ -13,11 +13,11 @@
     if(isset($_GET['id'])){
         $id = $_GET['id'];
 
-        // delete from tblstudent first to avoid foreign key constraint error
+        
         $sql1 = "DELETE FROM tblstudent WHERE studentid = '$id'";
         mysqli_query($connection, $sql1);
 
-        // delete from tbluser
+        
         $sql2 = "DELETE FROM tbluser WHERE userid = '$id'";
         mysqli_query($connection, $sql2);
 

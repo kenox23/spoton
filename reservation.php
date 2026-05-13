@@ -1,66 +1,92 @@
 <?php
-    session_start();
-    include 'connect.php';
-    include 'readrecords.php';   
-    require_once 'includes/header.php'; 
+session_start();
+include 'connect.php';
+require_once 'includes/header.php';
 
-    // Check if the user is logged in, if not redirect to login page
-    if(!isset($_SESSION['userid'])){
-        header("location: login.php");
-        exit();
-    }
+if(!isset($_SESSION['userid'])){
+    header("location: login.php");
+    exit();
+}
 
-    if(isset($_POST['btnReserve'])){
-        $studentid = $_SESSION['userid'];
-        $date = $_POST['date'];
-        $start = $_POST['starttime'];
-        $end = $_POST['endtime'];
-        $purpose = $_POST['purpose'];
-        $waitingarea = $_POST['waitingarea'];
+if(isset($_POST['btnreserve'])){
 
-        $sql = "insert into tblreservation
-                (studentid, reservationdate, starttime, endtime, purpose, status, waitingareaid)
-                values
-                ('$studentid', '$date', '$start', '$end', '$purpose', 'pending', '$waitingarea')";
+    $studentid = $_SESSION['userid'];
+    $date = $_POST['date'];
+    $start = $_POST['starttime'];
+    $end = $_POST['endtime'];
+    $purpose = $_POST['purpose'];
+    $waitingarea = $_POST['waitingarea'];
 
-        mysqli_query($connection, $sql);
+    $sql = "insert into tblreservation
+            (studentid, reservationdate, starttime, endtime, purpose, status, waitingareaid)
+            values
+            ('$studentid', '$date', '$start', '$end', '$purpose', 'pending', '$waitingarea')";
 
-        echo "<script>
-            alert('Reservation submitted successfully!');
-            window.location.href='reservations.php';
-        </script>";
-    }
+    mysqli_query($connection, $sql);
+
+    echo "<script>
+        alert('reservation submitted successfully');
+        window.location.href='reservations.php';
+    </script>";
+}
 ?>
 
-<div>
-    <h2>Make a Reservation</h2>
+<div style="background-color:#8a252c; height:10px; width:100%;"></div>
 
-    <form method="post">
+<div class="container mt-4">
 
-        Date:
-        <input type="date" name="date" required><br><br>
+    <div class="sis-page-header mb-4">
+        <h3 class="mb-1">Make Reservation</h3>
+    </div>
 
-        Start Time:
-        <input type="time" name="starttime" required><br><br>
+    <div class="sis-card p-4">
 
-        End Time:
-        <input type="time" name="endtime" required><br><br>
+        <form method="post">
 
-        Purpose:
-        <input type="text" name="purpose" required><br><br>
+            <div class="form-group">
+                <label>date</label>
+                <input type="date" name="date" class="form-control" required>
+            </div>
 
-        Waiting Area:
-        <select name="waitingarea" required>    
-            <?php
-                $sql = "select * from tblwaitingarea";
-                $result = mysqli_query($connection, $sql);
-                while($row = mysqli_fetch_assoc($result)){
-                    echo "<option value='".$row['waitingareaid']."'>".$row['areaname']."</option>";
-                }
-            ?>
-        </select><br><br>
-        <input type="submit" name="btnReserve" value="Submit Reservation">
-    </form>
+            <div class="form-group">
+                <label>start time</label>
+                <input type="time" name="starttime" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label>end time</label>
+                <input type="time" name="endtime" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label>purpose</label>
+                <input type="text" name="purpose" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label>waiting area</label>
+                <select name="waitingarea" class="form-control" required>
+
+                    <?php
+                        $sql = "select * from tblwaitingarea";
+                        $result = mysqli_query($connection, $sql);
+
+                        while($row = mysqli_fetch_array($result)){
+                            echo "<option value='".$row['waitingareaid']."'>".$row['areaname']."</option>";
+                        }
+                    ?>
+
+                </select>
+            </div>
+
+            <button type="submit" name="btnreserve" class="btn btn-sis btn-block">
+                submit
+            </button>
+
+        </form>
+
+    </div>
+
 </div>
 
 <?php require_once 'includes/footer.php'; ?>

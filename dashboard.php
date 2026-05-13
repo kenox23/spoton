@@ -10,16 +10,71 @@
 
     $userid = $_SESSION['userid'];
     $role = $_SESSION['role'];
+    $firstname = $_SESSION['firstname'];
+    $middlename = $_SESSION['middlename'];
+    $lastname = $_SESSION['lastname'];
+
+    $middleinitial = !empty($middlename) ? strtoupper(substr($middlename, 0, 1)) . "." : "";
+    $fullname = $firstname . " " . $middleinitial . " " . $lastname;
+
+    $pendingCount = 0;
+    $approvedCount = 0;
+    $totalCount = 0;
+
+    if($role == 'student') {
+        $sql = "select * from tblreservation where studentid = '$userid'";
+        $result = mysqli_query($connection, $sql);
+        while($row = mysqli_fetch_array($result)){
+            $totalCount++;
+            if($row['status'] == 'pending') {
+                $pendingCount++;
+            } else if($row['status'] == 'approved') {
+                $approvedCount++;
+            }
+        }
+    } else if($role == 'admin') {
+        $sql = "select * from tblreservation";
+        $result = mysqli_query($connection, $sql);
+        while($row = mysqli_fetch_array($result)){
+            $totalCount++;
+            if($row['status'] == 'pending') {
+                $pendingCount++;
+            } else if($row['status'] == 'approved') {
+                $approvedCount++;
+            }
+        }
+    }
 ?>
 
 <div style="background-color:#8a252c; height:10px; width:100%;"></div>
 
-<div>
-    <h2>Dashboard</h2>
-    <p>Welcome, <?php echo $_SESSION['username']; ?>!</p>
+<div class="header">
+    <div>
+        <h2>Dashboard</h2>
+        <p>Welcome, <?php echo $fullname; ?>!</p>
+    </div>
 </div>
 
-<!-- if the user is a student, show their reservations and option to make new reservations. -->
+<div class="cards">
+
+    <div class="card">
+        <h3>Reservations</h3>
+        <p><?php echo $totalCount; ?></p>
+    </div>
+
+    <div class="card">
+        <h3>Pending</h3>
+        <p><?php echo $pendingCount; ?></p>
+    </div>
+
+    <div class="card">
+        <h3>Approved</h3>
+        <p><?php echo $approvedCount; ?></p>
+    </div>
+
+</div>
+
+
 <?php if($role == 'student') { ?>
     <a href="reservation.php">Make a Reservation</a><br>
     <h3>My Reservations</h3>
@@ -45,22 +100,28 @@
                 $sql2 = "select * from tblwaitingarea where waitingareaid = '$waitingareaid'";
                 $result2 = mysqli_query($connection, $sql2);
                 $waitingarea = mysqli_fetch_assoc($result2);
+                $date = date("F d, Y", strtotime($row['reservationdate']));
+                $start = date("h:i A", strtotime($row['starttime']));
+                $end = date("h:i A", strtotime($row['endtime']));
+                $status = strtolower($row['status']);
 
                 echo "<tr>";
                 echo "<td>".$row['reservationid']."</td>";
-                echo "<td>".$row['reservationdate']."</td>";
-                echo "<td>".$row['starttime']."</td>";
-                echo "<td>".$row['endtime']."</td>";
+                echo "<td>".$date."</td>";
+                echo "<td>".$start."</td>";
+                echo "<td>".$end."</td>";
                 echo "<td>".$row['purpose']."</td>";
                 echo "<td>".$waitingarea['areaname']."</td>";
-                echo "<td>".$row['status']."</td>";
+                echo "<td>
+                    <span class='status-".$status."'>".($status)."</span>
+                    </td>";
                 echo "</tr>";
             }
         ?>
     </table>
 <?php } ?>
 
-<!-- if the user is an admin, show all reservations and option to manage users. -->
+
 <?php if($role == 'admin') { ?>
     <h3>Welcome, Admin <?php echo $_SESSION['username']; ?>!</h3>
 
@@ -112,6 +173,8 @@
             $result = mysqli_query($connection, $sql);
 
             while($row = mysqli_fetch_array($result)){
+                $status = strtolower($row['status']);
+
                 echo "<tr>";
                 echo "<td>".$row['reservationid']."</td>";
                 echo "<td>".$row['firstname']." ".$row['lastname']."</td>";
@@ -120,7 +183,9 @@
                 echo "<td>".$row['endtime']."</td>";
                 echo "<td>".$row['purpose']."</td>";
                 echo "<td>".$row['areaname']."</td>";
-                echo "<td>".$row['status']."</td>";
+                echo "<td>
+                    <span class='status-".$status."'>".($status)."</span>
+                    </td>";
 
                 echo "<td>
                     <a href='updatestatus.php?id=".$row['reservationid']."&status=approved'>Approve</a> | 
@@ -131,7 +196,5 @@
         ?>
     </table>
 <?php } ?>
-
-<a href="logout.php">Logout</a>
 
 <?php require_once 'includes/footer.php'; ?>

@@ -1,42 +1,173 @@
 .button {
-        background-color: #4CAF50; /* Green */
-        border: none;
-        color: white;
-        padding: 15px 32px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
-        margin: 4px 2px;
-        cursor: pointer;    
-    }
-
-.button1 {width: 200px;}
-
-.btn-sis {
-    background-color: #8a252c;
-    border-color: #8a252c;
-    color: #fff;
-    transition: 0.2s ease;
-    border-radius: 6px;
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
 }
 
-.btn-sis:hover {
-    background-color: #6f1d22;
-    border-color: #6f1d22;
+.button1 {
+    width: 200px;
+}
+
+.btn-sis,
+.btn-sis-outline {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 120px;
+    height: 38px;
+
+    padding: 0 16px;
+    font-size: 13px;
+    font-weight: 500;
+
+    border-radius: 6px;
+
+    text-decoration: none;
+    cursor: pointer;
+
+    transition: 0.2s ease;
+    box-sizing: border-box;
+}
+.btn-sis {
+    background-color: #8a252c;
+    border: 1px solid #8a252c;
     color: #fff;
-    transform: translateY(-1px);
 }
 
 .btn-sis-outline {
     background: transparent;
     border: 1px solid #8a252c;
     color: #8a252c;
-    border-radius: 6px;
-    transition: 0.2s ease;
+}
+.btn-sis:hover {
+    background-color: #6f1d22;
+    border-color: #6f1d22;
+    color: #fff;
 }
 
 .btn-sis-outline:hover {
     background-color: #8a252c;
     color: #fff;
+}
+body {
+    background: #f5f6f8;
+    font-family: Arial, sans-serif;
+}
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 0;
+    padding: 15px 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.card {
+    background: #fff;
+    padding: 18px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+}
+
+.card h3 {
+    margin: 0;
+    font-size: 28px;
+    font-weight: 700;
+    color: #333;
+}
+
+.card p {
+    margin-top: 6px;
+    color: #777;
+    font-size: 13px;
+}
+a {
+    text-decoration: none;
+}
+
+a[href*="reservation.php"],
+a[href*="logout.php"],
+a[href*="register.php"],
+a[href*="update.php"],
+a[href*="delete.php"] {
+    display: inline-block;
+    padding: 8px 14px;
+    border-radius: 6px;
+    background: #8a252c;
+    color: #fff !important;
+    margin: 5px 0;
+    font-size: 13px;
+}
+
+a:hover {
+    opacity: 0.9;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    margin-top: 10px;
+}
+
+table th {
+    background: #8a252c;
+    color: #fff;
+    padding: 12px;
+    font-size: 13px;
+}
+
+table td {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    font-size: 13px;
+    color: #333;
+}
+
+tr:hover {
+    background: #faf4f4;
+}
+.topbar {
+    background: #8a252c;
+    height: 8px;
+    width: 100%;
+}
+.status {
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    display: inline-block;
+}
+
+.status-approved {
+    background: #d4edda;
+    color: #28a745;
+}
+
+.status-pending {
+    background: #fff3cd;
+    color: #fd7e14;
+}
+
+.status-rejected {
+    background: #f8d7da;
+    color: #dc3545;
 }

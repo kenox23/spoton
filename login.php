@@ -10,23 +10,27 @@ require_once 'includes/header2.php';
 
     <h3 class="text-center mb-4">Login</h3>
 
-    <form method="post">
+    <div class="sis-card p-4">
 
-        <div class="form-group">
-            <label>Username</label>
-            <input type="text" name="txtusername" class="form-control" required>
-        </div>
+        <form method="post">
 
-        <div class="form-group">
-            <label>Password</label>
-            <input type="password" name="txtpassword" class="form-control" required>
-        </div>
+            <div class="form-group">
+                <label>Username</label>
+                <input type="text" name="txtusername" class="form-control" required>
+            </div>
 
-        <button type="submit" name="btnLogin" class="btn btn-sis btn-block">
-            Login
-        </button>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" name="txtpassword" class="form-control" required>
+            </div>
 
-    </form>
+            <button type="submit" name="btnLogin" class="btn btn-sis btn-block">
+                Login
+            </button>
+
+        </form>
+
+    </div>
 
 </div>
 
@@ -36,7 +40,7 @@ require_once 'includes/header2.php';
 		$uname=$_POST['txtusername'];
 		$pwd=$_POST['txtpassword'];
 		
-		//check tbluser if username is existing
+
 		$sql ="Select * from tbluser where username='".$uname."'";
 		
 		$result = mysqli_query($connection,$sql);	
@@ -49,8 +53,8 @@ require_once 'includes/header2.php';
 						alert('username not existing.');
 				  </script>";
 				  
-		//}else if($row[3] != $pwd) {		
-		// since we hashed the password during registration, we need to use password_verify to compare the entered password with the hashed password in database
+
+
 		}else if(!password_verify($pwd,$row['password'])){
 			echo "<script language='javascript'>
 				alert('Incorrect password');
@@ -59,6 +63,10 @@ require_once 'includes/header2.php';
 			$_SESSION['userid']=$row['userid'];
 			$_SESSION['username']=$row['username'];
 			$_SESSION['role']=$row['role'];
+
+			$_SESSION['firstname']=$row['firstname'];
+			$_SESSION['middlename']=$row['middlename'];
+			$_SESSION['lastname']=$row['lastname'];
 			header("location: dashboard.php");
 			exit();
 		}
