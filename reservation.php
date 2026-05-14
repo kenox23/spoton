@@ -26,7 +26,7 @@ if(isset($_POST['btnreserve'])){
 
     echo "<script>
         alert('reservation submitted successfully');
-        window.location.href='reservations.php';
+        window.location.href='dashboard.php';
     </script>";
 }
 ?>
