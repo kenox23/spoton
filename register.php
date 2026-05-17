@@ -153,6 +153,10 @@ if(isset($_POST['btnRegister'])){
     $_SESSION['username'] = $username;
     $_SESSION['role'] = 'student';
 
+    $_SESSION['firstname'] = $fname;
+    $_SESSION['middlename'] = $mname;
+    $_SESSION['lastname'] = $lname;
+
     echo "<script>
         alert('registration successful');
         window.location.href='dashboard.php';

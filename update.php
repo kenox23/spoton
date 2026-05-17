@@ -14,14 +14,15 @@ if(!isset($_SESSION['userid']) || $_SESSION['role'] != 'admin'){
 if(isset($_GET['id'])){
     $id = (int)$_GET['id'];
 
-    $sql = "SELECT * 
-            FROM tbluser 
-            INNER JOIN tblstudent 
-            ON tbluser.userid = tblstudent.studentid 
-            WHERE tbluser.userid='$id'";
+        $sqlUser = "select username from tbluser where userid = '$id'";
+        $resultUser = mysqli_query($connection, $sqlUser);
+        $user = mysqli_fetch_assoc($resultUser);
 
-    $result = mysqli_query($connection, $sql);
-    $row = mysqli_fetch_array($result);
+        $sqlStudent = "select program, yearlevel from tblstudent where studentid = '$id'";
+        $resultStudent = mysqli_query($connection, $sqlStudent);
+        $student = mysqli_fetch_assoc($resultStudent);
+
+        $row = array_merge((array)$user, (array)$student);
 
 } else {
     echo "<script>
@@ -37,13 +38,13 @@ if(isset($_POST['btnUpdate'])){
     $program = $_POST['txtprogram'];
     $yearlevel = $_POST['txtyearlevel'];
 
-    $sql1 = "UPDATE tbluser 
-             SET username='$username' 
-             WHERE userid='$id'";
+    $sql1 = "update tbluser 
+             set username='$username' 
+             where userid='$id'";
 
-    $sql2 = "UPDATE tblstudent 
-             SET program='$program', yearlevel='$yearlevel' 
-             WHERE studentid='$id'";
+    $sql2 = "update tblstudent 
+             set program='$program', yearlevel='$yearlevel' 
+             where studentid='$id'";
 
     if(mysqli_query($connection, $sql1) && mysqli_query($connection, $sql2)){
         echo "<script>

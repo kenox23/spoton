@@ -6,7 +6,7 @@
 	    die('Could not connect: ' . mysqli_connect_error());
 }
 	
-	$query = 'SELECT * FROM tbluser, tblstudent WHERE tbluser.userid = tblstudent.studentid';
+	$query = 'select * from tbluser, tblstudent where tbluser.userid = tblstudent.studentid';
 	$resultset = mysqli_query($connection, $query);
 	
 

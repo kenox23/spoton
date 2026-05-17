@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/site.css">
 
-    <title>SIS - <?php echo $title ?></title>
+    <title>SpotON </title>
 </head>
 
 <body>

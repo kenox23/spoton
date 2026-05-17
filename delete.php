@@ -14,11 +14,11 @@
         $id = $_GET['id'];
 
         
-        $sql1 = "DELETE FROM tblstudent WHERE studentid = '$id'";
+        $sql1 = "delete from tblstudent where studentid = '$id'";
         mysqli_query($connection, $sql1);
 
         
-        $sql2 = "DELETE FROM tbluser WHERE userid = '$id'";
+        $sql2 = "delete from tbluser where userid = '$id'";
         mysqli_query($connection, $sql2);
 
         echo "<script language='javascript'>
